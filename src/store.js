@@ -19,8 +19,14 @@ export default new Vuex.Store({
 
   },
   mutations: {
+    newGame(state, game) {
+      state.game = game
+
+    },
+
     setGame(state, game) {
       state.game = game
+
     },
     setPlayerCard(state, playerCard) {
       state.playerCard = playerCard
@@ -33,10 +39,9 @@ export default new Vuex.Store({
   },
   actions: {
     startGame({ commit }) {
-      debugger
       battlecardzapi.post("")
         .then(res => {
-          commit('setGame', res.data.game)
+          commit('newGame', res.data.game)
           console.log(res.data.game)
           router.push({ name: 'game', params: { gameId: res.data.game.id } })
         })
@@ -49,9 +54,8 @@ export default new Vuex.Store({
         })
     },
     attack({ commit }, payload) {
-      battlecardzapi.put('/' + payload.game, payload.cards)
+      battlecardzapi.put('/' + payload.gameId, payload)
         .then(res => {
-          console.log("yes!!!!!!!")
           commit("setGame", res.data.game)
         })
     },

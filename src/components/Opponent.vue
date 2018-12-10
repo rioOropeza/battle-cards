@@ -1,5 +1,5 @@
 <template>
-  <div class="col-3">
+  <div class="col">
     <div class="card" style="width: 18rem;" v-for="card in opponent.hand">
       {{card.name}}
       <img class="card-img-top" :src="card.img" height="100px" width="100px" @click="activeOpponentCard(card)">
@@ -21,18 +21,17 @@
     },
     methods: {
       activeOpponentCard(card) {
+        this.$store.dispatch("opponentCard", card)
         console.log(this.$store.state.opponentCard)
-        if (!this.$store.state.opponentCard || this.$store.state.opponentCard.dead) {
-          this.$store.dispatch("opponentCard", card)
-        } else {
-          console.log('already have one')
-        }
       }
     }
     ,
     computed: {
       opponent() {
         return this.$store.state.game.opponent
+      },
+      opponentDeadCards() {
+        return this.$store.state.game.opponent.deadCards
       }
     }
   }

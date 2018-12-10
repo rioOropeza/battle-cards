@@ -1,6 +1,6 @@
 <template>
-  <div class=" container-fluid">
-    <div class="row justify-content-center flex-direction-row">
+  <div class="container">
+    <div class="row">
       <Opponent></Opponent>
     </div>
     <div class="row">
@@ -22,27 +22,35 @@
       Opponent
     },
     computed: {
-      cards() {
-        return {
-          playerCard: this.$store.state.playerCard.id,
-          opponentCard: this.$store.state.opponentCard.id
-        }
+      game() {
+        return this.$store.state.game
+      },
+      playerCard() {
+        return this.$store.state.playerCard
+      },
+      opponentCard() {
+        return this.$store.state.opponentCard
+
       }
     },
     methods: {
       attack() {
-        this.$store.dispatch("attack", { game: this.$route.params.gameId, cards: this.cards })
-      },
-      computed: {
-        game() {
-          return this.$store.state.game
+        let payload = {
+          gameId: this.game.id,
+          playerCardId: this.playerCard.id,
+          opponentCardId: this.opponentCard.id
         }
-      },
-      mounted() {
-        debugger
-        this.$store.dispatch("getGame", this.$route.params.gameId)
+        this.$store.dispatch("attack", payload)
       }
+    },
+    data() {
+      return {
+      }
+    },
+    mounted() {
+      this.$store.dispatch("getGame", this.$route.params.gameId)
     }
   }
+
 
 </script>

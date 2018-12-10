@@ -1,5 +1,5 @@
 <template>
-  <div class="col-3">
+  <div class="col">
     <div class="card" style="width: 18rem;" v-for="card in player.hand">
       {{card.name}}
       <img class="card-img-top" :src="card.img" height="100px" width="100px" @click="activePlayerCard(card)">
@@ -22,14 +22,12 @@
     },
     methods: {
       activePlayerCard(card) {
-        if (!this.$store.state.playerCard || this.$store.state.playerCard.dead) {
-          this.$store.dispatch("playerCard", card)
-        } else {
-          console.log('already have one')
-        }
+        this.$store.dispatch("playerCard", card)
+        console.log(this.$store.state.playerCard)
       }
     }
   }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
