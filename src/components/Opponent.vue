@@ -1,5 +1,5 @@
 <template>
-  <div class="col-12">
+  <div class="row justify-content-center">
     <div class="card" style="width: 18rem;" v-for="card in opponent.hand" @click="activeOpponentCard(card)">
       <div @click="active.cardId=card.id" :class="{'border-warning': card.id == active.cardId}">
         <img v-if="!card.visible" class="card-img-top cardback" src="@/assets/yugi.jpg" height="100px" width="100px">
@@ -10,6 +10,7 @@
             {{card.health}}</p>
         </div>
       </div>
+
     </div>
   </div>
 </template>
