@@ -2,7 +2,7 @@
   <div class="col-12">
     <div class="card" style="width: 18rem;" v-for="card in opponent.hand" @click="activeOpponentCard(card)">
       <div @click="active.cardId=card.id" :class="{'border-warning': card.id == active.cardId}">
-        <img v-if="!card.visible" class="card-img-top" src="/assets/yugi.jpg" height="100px" width="100px">
+        <img v-if="!card.visible" class="card-img-top cardback" src="@/assets/yugi.jpg" height="100px" width="100px">
         <img v-if="card.visible" class="card-img-top" :src="card.img" height="100px" width="100px">
         <div class="card-body">
           <h5 class="card-title" v-if="card.visible">{{card.name}}</h5>
@@ -45,5 +45,10 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .cardback {
+    height: 200px;
+    width: 175px;
 
+
+  }
 </style>
