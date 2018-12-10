@@ -1,11 +1,14 @@
 <template>
   <div class="col-12">
-    <div class="card" style="width: 18rem;" v-for="card in opponent.hand">
-      {{card.name}}
-      <img class="card-img-top" :src="card.img" height="100px" width="100px" @click="activeOpponentCard(card)">
-      <div class="card-body">
-        <h5 class="card-title">{{card.name}}</h5>
-        <p class="card-text">Attack: {{card.attack}} Defense: {{card.defense}} Health: {{card.health}}</p>
+    <div class="card" style="width: 18rem;" v-for="card in opponent.hand" @click="activeOpponentCard(card)">
+      <div @click="active.cardId=card.id" :class="{'border-warning': card.id == active.cardId}">
+        <img v-if="!card.visible" class="card-img-top" src="/assets/yugi.jpg" height="100px" width="100px">
+        <img v-if="card.visible" class="card-img-top" :src="card.img" height="100px" width="100px">
+        <div class="card-body">
+          <h5 class="card-title" v-if="card.visible">{{card.name}}</h5>
+          <p class="card-text" v-if="card.visible">Attack: {{card.attack}} Defense: {{card.defense}} Health:
+            {{card.health}}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -16,6 +19,9 @@
     name: 'Opponent',
     data() {
       return {
+        active: {
+          cardId: ''
+        }
 
       }
     },
