@@ -1,5 +1,15 @@
 <template>
   <div class="container-fluid">
+    <!-- wrap 4-10 in their own div with v-if="!game.over" -->
+    <div v-if="game.player.dead">
+      <h2>lose</h2>
+    </div>
+    <div v-if="game.opponent.dead">
+      <h2>you win</h2>
+    </div>
+    <div v-if="game.player.dead && game.opponent.dead">
+      <h2>tie</h2>
+    </div>
     <div class="row">
       <Opponent></Opponent>
     </div>
@@ -7,6 +17,7 @@
       <Player></Player>
     </div>
     <button @click="attack">attack</button>
+    <!-- v-else gameOver -->
   </div>
 </template>
 
