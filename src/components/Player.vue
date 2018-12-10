@@ -1,5 +1,5 @@
 <template>
-  <div class="col">
+  <div>
     <div class="card" style="width: 18rem;" v-for="card in player.hand">
       {{card.name}}
       <img class="card-img-top" :src="card.img" height="100px" width="100px" @click="activePlayerCard(card)">
